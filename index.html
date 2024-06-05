@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penghitung Pengunjung</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    background-color: #e0f7fa;
+}
+
+.visitor-box {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #89f7fe, #66a6ff);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    width: 100%;
+    margin-top: 20vh;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+#visitor-count {
+    font-size: 2.5em;
+    margin: 10px 0;
+}
+
+.info {
+    font-size: 0.9em;
+    margin-top: 15px;
+    opacity: 0.8;
+}
+
+</style>
+    <div class="visitor-box">
+        <h1>Jumlah Pengunjung</h1>
+        <p id="visitor-count">0</p>
+        <p class="info">Jumlah pengunjung akan terganti setiap hari.</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    const visitorCountElement = document.getElementById('visitor-count');
+    
+    const resetTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+    const now = new Date();
+    
+    let visitorData = JSON.parse(localStorage.getItem('visitorData')) || {
+        count: 0,
+        resetTimestamp: now.getTime() + resetTime
+    };
+
+    if (now.getTime() >= visitorData.resetTimestamp) {
+        visitorData = {
+            count: 0,
+            resetTimestamp: now.getTime() + resetTime
+        };
+    }
+
+    visitorData.count += 1;
+    localStorage.setItem('visitorData', JSON.stringify(visitorData));
+
+    // Animasi angka bertahap
+    let currentCount = 0;
+    const finalCount = visitorData.count;
+    const incrementSpeed = 1000 / finalCount; // Kecepatan peningkatan bergantung pada jumlah pengunjung
+
+    const incrementCounter = () => {
+        if (currentCount < finalCount) {
+            currentCount++;
+            visitorCountElement.textContent = currentCount;
+            setTimeout(incrementCounter, incrementSpeed);
+        } else {
+            visitorCountElement.textContent = finalCount;
+        }
+    };
+
+    incrementCounter();
+});
+
+  </script>
+</html>
