@@ -12,4 +12,4 @@ Language:
 silahkan coba:
 https://dikrey.github.io/penghitung/
  
-kasih star nya abangkuh⭐
+kasih stars nya abangkuh⭐
