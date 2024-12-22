@@ -1,6 +1,6 @@
 Hello world
 
-kali ini saya akan membagikan sc penghitung jumlah pengunjung di website anda dan akan otomatis mengulang menjadi 0 dalam 1x24 jam
+kali ini saya akan membagikan sc/source code penghitung jumlah pengunjung di website anda dan akan otomatis mengulang menjadi 0 dalam 1x24 jam
 
 
 Language:
